@@ -13,6 +13,7 @@ from os.path import dirname
 sys.path.insert(0, dirname(__file__) + '/../lib')
 
 from DownloadHTTPSProxy import Download
+from Download import Download as D
 
 # download
 #
@@ -21,6 +22,24 @@ from DownloadHTTPSProxy import Download
 # @return count int
 def download(url, times):
   d = Download(url)
+  count = 0
+  
+  for i in range(times):
+    if d.doRequest():
+      print 'ERROR: ', d.getHTTPCODE(), ' ', url
+    else:
+      count = count + 1
+      print 'SUCCESS: ', count
+  
+  return count
+
+# downloada
+#
+# @param url string
+# @param times int
+# @return count int
+def downloada(url, times):
+  d = D(url)
   count = 0
   
   for i in range(times):
@@ -52,7 +71,7 @@ def main():
   print "******result: ", rtv
 
   # 360应用市场
-  url = "shouji.360tpcdn.com/150109/908c7e34961467cd2cfdf4b54a9d6148/com.jutu.dragonfly_8.apk"
+  url = "http://shouji.360tpcdn.com/150109/908c7e34961467cd2cfdf4b54a9d6148/com.jutu.dragonfly_8.apk"
   print "******starting 360应用市场****"
   rtv = download(url, times)
   print "******result: ", rtv
@@ -74,7 +93,8 @@ def main():
   # n多市场
   url = "http://static.nduoa.com/apk/843/843676/1560760/com.jutu.dragonfly.apk"
   print "*****startingn多市场****"
-  rtv = download(url, times)
+  #rtv = download(url, times)
+  rtv = downloada(url, times)
   print "****result: ", rtv
 
   # 优易网
@@ -96,13 +116,15 @@ def main():
   # 百度应用市场
   url = "http://gdown.baidu.com/data/wisegame/ec908e75f24750d2/zhuanqianmizhan_8.apk"
   print "*****starting 百度应用市场****"
-  rtv = download(url, times)
+  #rtv = download(url, times)
+  rtv = downloada(url, times)
   print "*****result: ", rtv
 
   # 91
   url = "http://bcs.91.com/pcsuite-dev/apk/f8609666c14a021c806ae7f7f858123e.apk"
   print "*****starting91****"
-  rtv = download(url, times)
+  #rtv = download(url, times)
+  rtv = downloada(url, times)
   print "******result: ", rtv
 
   # 安卓市场
