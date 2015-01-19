@@ -47,7 +47,6 @@ class Download(object):
     except Exception, e:
       if isinstance(e, urllib2.HTTPError):
         print 'http error: {0}'.format(e.code)
-        print e
         return 1
       elif isinstance(e, urllib2.URLError)  and isinstance(e.reason, socket.timeout):
         print 'url error: socket timeout {0}'.format(e.__str__())
